@@ -62,7 +62,7 @@ var pref_handler = {
 			if (tree.view.getCellValue(i, tree.columns.getColumnAt(0)) == 'true') {
 
 				arr_collections[tree.contentView.getItemAtIndex(i).getAttribute('parent_type')][tree.contentView.getItemAtIndex(i).getAttribute('parent_type')+'_' + tree.contentView.getItemAtIndex(i).id] = {
-					'bool-export' : 'true','id': tree.contentView.getItemAtIndex(i).id
+					'bool-export' : 'true','id': tree.contentView.getItemAtIndex(i).id, 'path' : tree.contentView.getCellText(i, tree.columns.getColumnAt(2))
 				};
 				
 			}
@@ -138,8 +138,13 @@ var pref_handler = {
 
 			// path simulation
 			var cellSim = document.createElement("treecell");
-			cellSim.setAttribute("label", collections[c].name.replace(new RegExp('[,/\:*?""<>|]', 'g'), "_"));
-			cellSim.setAttribute("editable", 'false');
+			cellSim.setAttribute("editable", 'true');
+			if (typeof(arr_pref['Collection']['Collection_' + collections[c].id]) != 'undefined')
+				var label = arr_pref['Collection']['Collection_' + collections[c].id]['path'];
+			else
+				var label = collections[c].name.replace(new RegExp('[,/\:*?""<>|]', 'g'), "_");
+			cellSim.setAttribute("label", label)
+
 			treeRowL.appendChild(cellSim);
 
 			// add treeRow to item

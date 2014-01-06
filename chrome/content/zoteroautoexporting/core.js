@@ -305,23 +305,23 @@ if ("undefined" != typeof (Zotero) && "undefined" == typeof (Zotero.AutoExportin
 			} else {
 				expTranslator.setCollection(collections[c]);
 				var tempFile = this.filenslfile.clone();
+				var path = this.custom_collections['Collection']['Collection_' + collections[c].id]['path']
 
 				// setup the new filenames from collection name
-				tempFile.leafName = collections[c].name.replace(new RegExp('[,/\:*?""<>|]', 'g'), "_") + ((/[.]/.exec(this.filenslfile.leafName)) ? '.' + /[^.]+$/.exec(this.filenslfile.leafName) : '');
+				tempFile.leafName = path;
 
-				
 				//check whether the file is already written
-				if(typeof this.files['succeed'][tempFile.leafName] != 'undefined' || typeof this.files['problematic'][tempFile.leafName] != 'undefined')
-					{
-					for (i=2;i<99;i++)
-					{
-					  if(typeof this.files['problematic'][s.name.replace(new RegExp('[,/\:*?""<>|]', 'g'), "_") +'-'+i+ ((/[.]/.exec(this.filenslfile.leafName)) ? '.' + /[^.]+$/.exec(this.filenslfile.leafName) : '')] == 'undefined')
-					   break;
-					}
-					this.log('File '+tempFile.leafName+' was already written. New filename now: '+s.name.replace(new RegExp('[,/\:*?""<>|]', 'g'), "_") +'-'+i+ ((/[.]/.exec(this.filenslfile.leafName)) ? '.' + /[^.]+$/.exec(this.filenslfile.leafName) : ''));
-					tempFile.leafName = s.name.replace(new RegExp('[,/\:*?""<>|]', 'g'), "_") +'-'+i+ ((/[.]/.exec(this.filenslfile.leafName)) ? '.' + /[^.]+$/.exec(this.filenslfile.leafName) : '');
-					this.files['problematic'][tempFile.leafName]=tempFile.leafName;
-					}
+				//if(typeof this.files['succeed'][tempFile.leafName] != 'undefined' || typeof this.files['problematic'][tempFile.leafName] != 'undefined')
+				//	{
+				//	for (i=2;i<99;i++)
+				//	{
+				//	  if(typeof this.files['problematic'][s.name.replace(new RegExp('[,/\:*?""<>|]', 'g'), "_") +'-'+i+ ((/[.]/.exec(this.filenslfile.leafName)) ? '.' + /[^.]+$/.exec(this.filenslfile.leafName) : '')] == 'undefined')
+				//	   break;
+				//	}
+				//	this.log('File '+tempFile.leafName+' was already written. New filename now: '+s.name.replace(new RegExp('[,/\:*?""<>|]', 'g'), "_") +'-'+i+ ((/[.]/.exec(this.filenslfile.leafName)) ? '.' + /[^.]+$/.exec(this.filenslfile.leafName) : ''));
+				//	tempFile.leafName = s.name.replace(new RegExp('[,/\:*?""<>|]', 'g'), "_") +'-'+i+ ((/[.]/.exec(this.filenslfile.leafName)) ? '.' + /[^.]+$/.exec(this.filenslfile.leafName) : '');
+				//	this.files['problematic'][tempFile.leafName]=tempFile.leafName;
+				//	}
 				
 				try {
 					expTranslator.setLocation(tempFile);
